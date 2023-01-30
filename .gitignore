@@ -22,6 +22,9 @@ target/
 .mvn
 mvnw*
 
+### Mac ###
+.DS_Store
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

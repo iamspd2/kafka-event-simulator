@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class SimulatorPublisherService {
 
     @Autowired
-    CamelContext camelContext;
+    private CamelContext camelContext;
 
     public String publishMessage(EventDetailsForm form) {
         log.info("Inside publishMessage service method");
@@ -21,6 +21,7 @@ public class SimulatorPublisherService {
                     .withProcessor(
                             exchange -> {
                                 exchange.setProperty("TOPIC", form.getTopic());
+                                exchange.setProperty("broker", form.getBroker());
                                 exchange.getIn().setBody(form.getPayload());
                             })
                     .to("direct:publishEventFlow").request(String.class);

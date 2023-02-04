@@ -25,14 +25,15 @@ $ java -jar target/kafka-event-simulator-1.0-SNAPSHOT.jar
 
 1. Go to [`localhost:4589`](http://localhost:4589) in your browser.
 2. Enter the payload & topic name in the text input fields.
-3. Click on `Submit`.
-4. The app will take care of creating the topic dynamically & publish the Kafka event.
+3. Choose the broker where you want to publish to. You can define a list of environments as explained below.
+4. Click on `Submit`.
+5. The app will take care of creating the topic dynamically & publish your desired Kafka event.
 
-### The `application.properties` file
+### The `application.yml` file
 
 This app requires minimal configuration. Feel free to tweak the following properties:
-- `server.port`: The port number on which the application would run
-- `kafkaProp.broker.url`: Kafka Broker URL. If not present, default value of `localhost:9092` would be taken
+- `server.port`: The port number on which the application would run.
+- `props.brokers`: Your list of Kafka Broker URLs, from which you can choose from in the UI & publish to multiple environments at will.
 
 ### Tech Used
 - Spring Boot

@@ -13,12 +13,9 @@ class SimulatorRoutes extends RouteBuilder {
 
         restConfiguration().component("servlet");
 
-        rest("").get("testapp")
-                        .to("direct:publishEventFlow");
-
         from("direct:publishEventFlow")
                 .log("Inside Camel Route to publish an event...")
-                .toD("kafka:${exchangeProperty.TOPIC}?brokers={{kafkaProp.broker.url:localhost:9092}}")
+                .toD("kafka:${exchangeProperty.TOPIC}?brokers=${exchangeProperty.broker}")
                 .setBody(constant("success"))
                 .log("Event published successfully! Exiting Route...");
     }

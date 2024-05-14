@@ -7,8 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Broker {
 
-    private String name;
+  private String name;
 
-    private String url;
+  private String url;
 
 }

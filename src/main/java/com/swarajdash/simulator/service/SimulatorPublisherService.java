@@ -11,25 +11,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class SimulatorPublisherService {
 
-    @Autowired
-    private CamelContext camelContext;
+  @Autowired
+  private CamelContext camelContext;
 
-    public String publishMessage(EventDetailsForm form) {
-        log.info("Inside publishMessage service method");
-        try (FluentProducerTemplate template = camelContext.createFluentProducerTemplate()) {
-            return template
-                    .withProcessor(
-                            exchange -> {
-                                exchange.setProperty("TOPIC", form.getTopic());
-                                exchange.setProperty("broker", form.getBroker());
-                                exchange.getIn().setBody(form.getPayload());
-                            })
-                    .to("direct:publishEventFlow").request(String.class);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return "failure";
-        }
+  public String publishMessage(EventDetailsForm form) {
+    log.info("Inside publishMessage service method");
+    try (FluentProducerTemplate template = camelContext.createFluentProducerTemplate()) {
+      return template
+          .withProcessor(
+              exchange -> {
+                exchange.setProperty("TOPIC", form.getTopic());
+                exchange.setProperty("broker", form.getBroker());
+                exchange.getIn().setBody(form.getPayload());
+              })
+          .to("direct:publishEventFlow").request(String.class);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "failure";
     }
+  }
 
 }

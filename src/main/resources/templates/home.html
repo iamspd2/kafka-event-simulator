@@ -1,43 +1,48 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" th:src="@{/index.js}"></script>
-    <link rel="stylesheet" th:href="@{/index.css}">
-    <title>Kafka Simulator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" th:src="@{/index.js}"></script>
+  <link rel="stylesheet" th:href="@{/index.css}">
+  <title>Kafka Simulator</title>
 </head>
 <body>
 <form method="POST" id="eventForm" th:object="${eventDetails}" action="#" th:action="@{'/publish'}">
-    <table>
-        <tr>
-            <td>
-                <label for="payload-input">Enter the payload</label><br>
-                <textarea id="payload-input" th:field="*{payload}" placeholder="Enter the payload" rows="32"
-                          cols="80" required></textarea>
-            </td>
-            <td>
-                <label for="topic-name">Enter the topic</label><br>
-                <input id="topic-name" type="text" th:field="*{topic}" placeholder="Enter the topic name"
-                       class="field-input" required>
-                <br><br>
+  <table>
+    <tr>
+      <td>
+        <label for="payload-input">Enter the payload</label><br>
+        <textarea id="payload-input" th:field="*{payload}" placeholder="Enter the payload" rows="32"
+                  cols="80" required></textarea><br>
+        <input type="button" class="myBtn" value="Format" style="background-color: #a87d32"
+               onclick="formatJson()">
+      </td>
+      <td>
+        <label for="topic-name">Enter the topic</label><br>
+        <input id="topic-name" type="text" th:field="*{topic}" placeholder="Enter the topic name"
+               class="field-input" required>
+        <br><br>
 
-                <label for="broker-choice">Choose your destination</label><br>
-                <select id="broker-choice" class="field-input" th:field="*{broker}">
-                    <option th:each="broker, stats : ${brokerList}" th:text="${#strings.toUpperCase(broker.name)}"
-                            th:value="${broker.url}"></option>
-                    <option value="other">Other</option>
-                </select>
+        <label for="broker-choice">Choose your destination</label><br>
+        <select id="broker-choice" class="field-input" th:field="*{broker}">
+          <option th:each="broker, stats : ${brokerList}"
+                  th:text="${#strings.toUpperCase(broker.name)}"
+                  th:value="${broker.url}"></option>
+          <option value="other">Other</option>
+        </select>
 
-                <br><br>
-                <input type="submit" class="myBtn" style="background-color: #0D0">
-                <input type="button" class="myBtn" value="Reset" style="background-color: #555" onclick="resetForm()">
-            </td>
-        </tr>
-    </table>
+        <br><br>
+        <input type="submit" class="myBtn" style="background-color: #0D0">
+        <input type="button" class="myBtn" value="Reset" style="background-color: #555"
+               onclick="resetForm()">
+      </td>
+    </tr>
+  </table>
+  <p id="publishResult" th:text="${publishResult}">abcd</p>
 </form>
 </body>
 </html>

@@ -3,6 +3,6 @@ server:
 
 props:
   brokers:
+    local: localhost:9092
     dev: localhost:9092
     uat: localhost:9092
-    prod: localhost:9092

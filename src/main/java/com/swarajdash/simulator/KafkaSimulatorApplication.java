@@ -9,15 +9,15 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class KafkaSimulatorApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KafkaSimulatorApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(KafkaSimulatorApplication.class, args);
+  }
 
-	@Bean
-	ServletRegistrationBean servletRegistrationBean() {
-		ServletRegistrationBean servlet = new ServletRegistrationBean
-				(new CamelHttpTransportServlet(), "/camel/*");
-		servlet.setName("CamelServlet");
-		return servlet;
-	}
+  @Bean
+  ServletRegistrationBean servletRegistrationBean() {
+    ServletRegistrationBean servlet = new ServletRegistrationBean
+        (new CamelHttpTransportServlet(), "/camel/*");
+    servlet.setName("CamelServlet");
+    return servlet;
+  }
 }
